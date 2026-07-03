@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blackbox
+  labels:
+    io.kompose.service: blackbox
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: blackbox
+  template:
+    metadata:
+      labels:
+        io.kompose.service: blackbox
+    spec:
+      containers:
+      - name: blackbox
+        image: prom/blackbox-exporter:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 9115
